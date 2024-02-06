@@ -16,6 +16,11 @@ const menuLinks: NavigationLink[] = [
         title: 'Dashboard',
         href: '/dashboard',
     },
+    {
+        id: 3,
+        title: 'Check-Ins',
+        href: '/check-ins',
+    }
 ]
 
 
