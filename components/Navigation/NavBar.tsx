@@ -4,6 +4,7 @@ import MobileNavigation from "@/components/Navigation/MobileNavigation";
 import LeftDesktopNavLinks from "@/components/Navigation/LeftDesktopNavLinks";
 import RightActionLinks from "@/components/Navigation/RightActionLinks";
 import UserAuthenticated from "@/components/UserAuthenticated";
+import {HeadingFour} from "@/components/Typography/Headers";
 
 export default function NavBar() {
     return (
@@ -31,9 +32,9 @@ export default function NavBar() {
 export function CompanyLogo() {
     return (
         <Link href="/" className="mr-6 flex items-center space-x-2 text-secondary-foreground">
-            <span className="font-bold sm:inline-block">
+            <HeadingFour color="secondary-foreground" className="sm:inline-block">
                 Company Logo
-            </span>
+            </HeadingFour>
         </Link>
     )
 }

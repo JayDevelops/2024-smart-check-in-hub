@@ -1,8 +1,9 @@
+import {HeadingOne} from "@/components/Typography/Headers";
 
 export default function Home() {
   return (
     <section className="home-page">
-      <h1>Home Page</h1>
+      <HeadingOne color="secondary-foreground">Home Page</HeadingOne>
     </section>
   )
 }

@@ -1,9 +1,11 @@
+import {HeadingOne} from "@/components/Typography/Headers";
+
 export default function CheckIns() {
     return (
         <section>
-            <h1>
+            <HeadingOne color="secondary-foreground">
                 Check-Ins Page
-            </h1>
+            </HeadingOne>
         </section>
     )
 }
