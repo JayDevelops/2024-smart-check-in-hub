@@ -1,9 +1,8 @@
-import React from 'react';
 
 export default function Dashboard() {
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <h1>Dashboard Page</h1>
-        </main>
+        <section className="dashboard-page">
+            <h1>DashBoard Page</h1>
+        </section>
     )
 }
