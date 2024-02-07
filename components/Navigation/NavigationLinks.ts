@@ -18,8 +18,8 @@ const menuLinks: NavigationLink[] = [
     },
     {
         id: 3,
-        title: 'Check-Ins',
-        href: '/check-ins',
+        title: 'Guests',
+        href: '/guests',
     }
 ]
 
