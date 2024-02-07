@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import classNames from "classnames";
+import {cn} from "@/lib/utils"
 
 type TextProps = PropsWithChildren<{
     variant?: "small" | "normal" | "large";
@@ -15,7 +15,7 @@ export function Text({ children, variant = "normal", className }: TextProps) {
 
     return (
         <p
-            className={classNames(
+            className={cn(
                 "leading-7",
                 textSizeClasses[variant],
                 { "&:not(:first-child)": "mt-6" },
@@ -37,7 +37,7 @@ export function BlockQuote({ children, variant = "normal", className }: TextProp
 
     return (
         <blockquote
-            className={classNames("mt-6 border-l-2 pl-6 italic", textSizeClasses[variant], className)}
+            className={cn("mt-6 border-l-2 pl-6 italic", textSizeClasses[variant], className)}
         >
             {children}
         </blockquote>
