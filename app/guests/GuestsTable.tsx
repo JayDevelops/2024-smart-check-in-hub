@@ -2,10 +2,12 @@
 import React, {useState} from "react";
 import {
     ColumnDef,
+    ColumnFiltersState,
     SortingState,
     flexRender,
     getCoreRowModel,
     getPaginationRowModel,
+    getFilteredRowModel,
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table";
@@ -18,6 +20,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 
 interface GuestsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -25,8 +28,11 @@ interface GuestsTableProps<TData, TValue> {
 }
 
 export default function GuestsTable<TData, TValue>({columns, data}: GuestsTableProps<TData, TValue>) {
-    // useState to be able to sort names for the sorting asc or desc
+    // useState to be able to sort columns, for example, like sorting asc or desc
     const [sorting, setSorting] = useState<SortingState>([])
+
+    //  useState to be able to filter data, for example, like inputting text to names
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
 
     //  Initialize the tan-stack table, then pass the data and columns
     const table = useReactTable({
@@ -37,13 +43,30 @@ export default function GuestsTable<TData, TValue>({columns, data}: GuestsTableP
         //  below, we will update the sorting state
         onSortingChange: setSorting,
         getSortedRowModel: getSortedRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        getFilteredRowModel: getFilteredRowModel(),
+
+        //  state object tracks the passed in states
         state: {
             sorting,
+            columnFilters,
         },
     })
 
     return (
         <div>
+            {/* FILTER TEXT COMPONENT TO FILTER BY NAME DATA*/}
+            <div className="flex items-center py-4">
+                <Input
+                    placeholder="Filter name..."
+                    value={(table.getColumn("fullName")?.getFilterValue() as string) ?? ""}
+                    onChange={(e) => (
+                        table.getColumn("fullName")?.setFilterValue(e.target.value)
+                    )}
+                    className="max-w-sm"
+                />
+            </div>
+
             <div className="rounded-md border">
                 {/* THE MAIN TABLE IS BEING RENDERED BELOW*/}
                 <Table>

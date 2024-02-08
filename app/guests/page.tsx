@@ -13,6 +13,7 @@ async function getData(): Promise<Guest[]> {
             id: 1,
             firstName: "Jesus",
             lastName: "Perez",
+            fullName: "Jesus Perez",
             notes: null,
             checkedInAt: currDate,
             checkedOutAt: null,
@@ -23,6 +24,7 @@ async function getData(): Promise<Guest[]> {
             id: 2,
             firstName: "Angel",
             lastName: "Santos",
+            fullName: "Angel Santos",
             notes: null,
             checkedInAt: currDate,
             checkedOutAt: null,
@@ -39,7 +41,7 @@ export default async function GuestsPage() {
         <section className="dashboard-page">
             <HeadingOne color="secondary-foreground">Guests Page</HeadingOne>
 
-            <div className="container mx-auto py-10">
+            <div className="container mx-auto py-4">
                 <GuestsTable columns={columns} data={data} />
             </div>
         </section>

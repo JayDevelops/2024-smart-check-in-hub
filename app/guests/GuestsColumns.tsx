@@ -11,37 +11,16 @@ import {
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
-import {MoreHorizontal, ArrowUpDown} from "lucide-react";
+import {MoreHorizontal} from "lucide-react";
+import {GuestTableColumnHeader} from "@/app/guests/GuestTableColumnHeader";
 
 
 export const columns: ColumnDef<Guest>[] = [
     {
-        accessorKey: "firstName",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    First Name
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-    },
-    {
-        accessorKey: "lastName",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    Last Name
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
+        accessorKey: "fullName",
+        header: ({column}) => (
+            <GuestTableColumnHeader column={column} title="Full Name" />
+        ),
     },
     {
         accessorKey: "guestStatus",

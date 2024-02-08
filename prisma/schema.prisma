@@ -27,6 +27,7 @@ model Guest {
   id           Int         @id @default(autoincrement())
   firstName    String
   lastName     String
+  fullName     String      @map("concat(first_name, ' ', last_name)")
   notes        String?
   checkedInAt  DateTime    @default(now())
   checkedOutAt DateTime?
