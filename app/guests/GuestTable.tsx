@@ -4,6 +4,7 @@ import {
     ColumnDef,
     ColumnFiltersState,
     SortingState,
+    VisibilityState,
     flexRender,
     getCoreRowModel,
     getPaginationRowModel,
@@ -19,20 +20,30 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import {
+    DropdownMenu,
+    DropdownMenuCheckboxItem,
+    DropdownMenuContent, DropdownMenuLabel,
+    DropdownMenuTrigger,DropdownMenuSeparator
+} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
+import {camelCaseToSpacedString} from "@/lib/utils";
 
 interface GuestsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
     data: TData[],
 }
 
-export default function GuestsTable<TData, TValue>({columns, data}: GuestsTableProps<TData, TValue>) {
+export default function GuestTable<TData, TValue>({columns, data}: GuestsTableProps<TData, TValue>) {
     // useState to be able to sort columns, for example, like sorting asc or desc
     const [sorting, setSorting] = useState<SortingState>([])
 
     //  useState to be able to filter data, for example, like inputting text to names
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+
+    //  useState to be able to hide and show columns visibility from the table
+    const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
 
     //  Initialize the tan-stack table, then pass the data and columns
     const table = useReactTable({
@@ -45,18 +56,20 @@ export default function GuestsTable<TData, TValue>({columns, data}: GuestsTableP
         getSortedRowModel: getSortedRowModel(),
         onColumnFiltersChange: setColumnFilters,
         getFilteredRowModel: getFilteredRowModel(),
-
+        onColumnVisibilityChange: setColumnVisibility,
         //  state object tracks the passed in states
         state: {
             sorting,
             columnFilters,
+            columnVisibility,
         },
     })
 
     return (
         <div>
-            {/* FILTER TEXT COMPONENT TO FILTER BY NAME DATA*/}
+            {/* TOP HEADER BUTTONS WHICH USE STATE TO FILTER NAME AND COLUMN VISIBILITY */}
             <div className="flex items-center py-4">
+                {/* FILTER TEXT COMPONENT TO FILTER BY NAME DATA*/}
                 <Input
                     placeholder="Filter name..."
                     value={(table.getColumn("fullName")?.getFilterValue() as string) ?? ""}
@@ -65,6 +78,33 @@ export default function GuestsTable<TData, TValue>({columns, data}: GuestsTableP
                     )}
                     className="max-w-sm"
                 />
+
+
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button variant="outline" className="ml-auto">
+                            Columns
+                        </Button>
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>
+                            Show/Hide Table Columns
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        {table.getAllColumns().filter((column) => column.getCanHide()).map(
+                            (column) => (
+                                <DropdownMenuCheckboxItem
+                                    key={column.id}
+                                    className="capitalize"
+                                    checked={column.getIsVisible()}
+                                    onCheckedChange={(value) => column.toggleVisibility(value)}
+                                >
+                                    {camelCaseToSpacedString(column.id)}
+                                </DropdownMenuCheckboxItem>
+                        ))}
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
 
             <div className="rounded-md border">

@@ -23,33 +23,34 @@ export const columns: ColumnDef<Guest>[] = [
         ),
     },
     {
-        accessorKey: "guestStatus",
+        accessorKey: "status",
         header: () => <div className="text-left">Status</div>,
         cell: ({row}) => {
-            const guestStatus: GuestStatus = row.getValue("guestStatus");
+            const guestStatus: GuestStatus = row.getValue("status");
             const statusInfo = guestStatusMap[guestStatus]
             return <Badge variant={statusInfo.badgeVariant}>{statusInfo.label}</Badge>
         }
     },
     {
-        accessorKey: "checkedInAt",
-        header: () => <div className="text-left">Sign In</div>,
+        accessorKey: "signedIn",
+        header: () => <div className="text-left"><span className="hidden md:inline-block">Sign</span> In</div>,
         cell: ({row}) => {
-            const signInAt: Date = row.getValue("checkedInAt")
+            const signInAt: Date = row.getValue("signedIn")
             const formattedTime = formatAmPm(signInAt)
             return <div className="text-left">{formattedTime}</div>
         }
     },
     {
-        accessorKey: "checkedOutAt",
-        header: () => <div className="text-left">Sign Out</div>,
+        accessorKey: "signedOut",
+        header: () => <div className="text-left"><span className="hidden md:inline-block">Sign</span> Out</div>,
         cell: ({row}) => {
-            const signOutAt: Date = row.getValue("checkedOutAt")
+            const signOutAt: Date = row.getValue("signedOut")
             const formattedTime = formatAmPm(signOutAt)
             return <div className="text-left">{formattedTime}</div>
         }
     },
     {
+      enableHiding: false,
       id: "actions",
       cell: ({row}) => {
           const guest: Guest = row.original

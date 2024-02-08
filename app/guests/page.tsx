@@ -1,6 +1,6 @@
 import {HeadingOne} from "@/components/Typography/Headers";
 import {Guest, GuestStatus} from "@prisma/client";
-import GuestsTable from "@/app/guests/GuestsTable";
+import GuestTable from "@/app/guests/GuestTable";
 import  {columns} from "@/app/guests/GuestsColumns"
 
 async function getData(): Promise<Guest[]> {
@@ -15,9 +15,9 @@ async function getData(): Promise<Guest[]> {
             lastName: "Perez",
             fullName: "Jesus Perez",
             notes: null,
-            checkedInAt: currDate,
-            checkedOutAt: null,
-            guestStatus: defaultStatus,
+            signedIn: currDate,
+            signedOut: null,
+            status: defaultStatus,
             locationId: 1,
         },
         {
@@ -26,9 +26,9 @@ async function getData(): Promise<Guest[]> {
             lastName: "Santos",
             fullName: "Angel Santos",
             notes: null,
-            checkedInAt: currDate,
-            checkedOutAt: null,
-            guestStatus: checkedOutStatus,
+            signedIn: currDate,
+            signedOut: null,
+            status: checkedOutStatus,
             locationId: 1,
         },
     ]
@@ -41,8 +41,8 @@ export default async function GuestsPage() {
         <section className="dashboard-page">
             <HeadingOne color="secondary-foreground">Guests Page</HeadingOne>
 
-            <div className="container mx-auto py-4">
-                <GuestsTable columns={columns} data={data} />
+            <div className="mx-auto py-4">
+                <GuestTable columns={columns} data={data} />
             </div>
         </section>
     )

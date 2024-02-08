@@ -19,3 +19,10 @@ export function formatAmPm(date: Date | null) {
   minutes = minutes < 10 ? '0'+minutes : minutes;
   return hours + ':' + minutes + ' ' + ampm;
 }
+
+// Function to convert camelCase to spaced string
+export function camelCaseToSpacedString(str: string): string {
+  return str
+      .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase and uppercase letters
+      .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2'); // Add space between consecutive uppercase letters followed by lowercase
+}

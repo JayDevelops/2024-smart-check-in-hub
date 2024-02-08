@@ -24,16 +24,16 @@ model Location {
 }
 
 model Guest {
-  id           Int         @id @default(autoincrement())
-  firstName    String
-  lastName     String
-  fullName     String      @map("concat(first_name, ' ', last_name)")
-  notes        String?
-  checkedInAt  DateTime    @default(now())
-  checkedOutAt DateTime?
-  guestStatus  GuestStatus
-  location     Location    @relation(fields: [locationId], references: [id])
-  locationId   Int
+  id         Int         @id @default(autoincrement())
+  firstName  String
+  lastName   String
+  fullName   String      @map("concat(first_name, ' ', last_name)")
+  notes      String?
+  signedIn   DateTime    @default(now())
+  signedOut  DateTime?
+  status     GuestStatus
+  location   Location    @relation(fields: [locationId], references: [id])
+  locationId Int
 }
 
 enum GuestStatus {
