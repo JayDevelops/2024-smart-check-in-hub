@@ -18,7 +18,7 @@ export const columns: ColumnDef<Guest>[] = [
         header: () => <div className="text-left">Status</div>,
         cell: ({row}) => {
             const guestStatus: GuestStatus = row.getValue("guestStatus");
-            const statusInfo = statusMap[guestStatus]
+            const statusInfo = guestStatusMap[guestStatus]
             return <Badge variant={statusInfo.badgeVariant}>{statusInfo.label}</Badge>
         }
     },
@@ -42,7 +42,7 @@ export const columns: ColumnDef<Guest>[] = [
     },
 ]
 
-const statusMap: Record<GuestStatus, {label: string, badgeVariant: 'default' | 'warning' | 'destructive'}> = {
+const guestStatusMap: Record<GuestStatus, {label: string, badgeVariant: 'default' | 'warning' | 'destructive'}> = {
     CHECKED_IN: {
         label: 'Checked In',
         badgeVariant: 'default'
