@@ -13,7 +13,7 @@ import {
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import {GuestTableColumnHeader} from "@/app/guests/GuestTableColumnHeader";
-
+import {useToast} from "@/components/ui/use-toast";
 
 export const columns: ColumnDef<Guest>[] = [
     {
@@ -38,7 +38,7 @@ export const columns: ColumnDef<Guest>[] = [
             const signInAt: Date = row.getValue("signedIn")
             const formattedTime = formatAmPm(signInAt)
             return <div className="text-left">{formattedTime}</div>
-        }
+        },
     },
     {
         accessorKey: "signedOut",
@@ -47,7 +47,7 @@ export const columns: ColumnDef<Guest>[] = [
             const signOutAt: Date = row.getValue("signedOut")
             const formattedTime = formatAmPm(signOutAt)
             return <div className="text-left">{formattedTime}</div>
-        }
+        },
     },
     {
       enableHiding: false,
@@ -60,6 +60,7 @@ export const columns: ColumnDef<Guest>[] = [
 ]
 
 function ActionButton({guest}: {guest: Guest}) {
+    const { toast } = useToast()
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -71,7 +72,12 @@ function ActionButton({guest}: {guest: Guest}) {
 
             <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => navigator.clipboard.writeText(guest.firstName + " " + guest.lastName)}>
+                <DropdownMenuItem onClick={() => {
+                    toast({
+                        description: `${guest.fullName} has been successfully copied to your clipboard!`
+                    })
+                    return navigator.clipboard.writeText(guest.fullName)
+                }}>
                     Copy Guest Name
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
@@ -81,6 +87,7 @@ function ActionButton({guest}: {guest: Guest}) {
         </DropdownMenu>
     )
 }
+
 
 const guestStatusMap: Record<GuestStatus, {label: string, badgeVariant: 'default' | 'warning' | 'destructive'}> = {
     CHECKED_IN: {

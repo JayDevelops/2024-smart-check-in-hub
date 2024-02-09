@@ -67,7 +67,7 @@ export function GuestTableColumnHeader<TData, TValue>(
 
                     <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
                         <XIcon className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-                        No Sorting
+                        Clear Sort
                     </DropdownMenuItem>
 
                 </DropdownMenuContent>

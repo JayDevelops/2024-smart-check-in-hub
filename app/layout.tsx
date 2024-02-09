@@ -5,6 +5,7 @@ import { Inter as FontSans } from "next/font/google";
 import React from "react";
 import {cn} from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster"
 import NavBar from "@/components/Navigation/NavBar";
 
  const fontSans = FontSans({
@@ -37,6 +38,7 @@ export default function RootLayout({
               <main className="md:container md:mx-auto p-4 overflow-y-hidden">
                   {children}
               </main>
+              <Toaster />
           </ThemeProvider>
           </body>
           </html>
