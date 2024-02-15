@@ -3,32 +3,19 @@ import React, {useState} from "react";
 import {
     ColumnDef,
     ColumnFiltersState,
-    SortingState,
-    VisibilityState,
     flexRender,
     getCoreRowModel,
-    getPaginationRowModel,
     getFilteredRowModel,
+    getPaginationRowModel,
     getSortedRowModel,
+    SortingState,
     useReactTable,
+    VisibilityState,
 } from "@tanstack/react-table";
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-import {
-    DropdownMenu,
-    DropdownMenuCheckboxItem,
-    DropdownMenuContent, DropdownMenuLabel,
-    DropdownMenuTrigger,DropdownMenuSeparator
-} from "@/components/ui/dropdown-menu";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import {camelCaseToSpacedString} from "@/lib/utils";
+import {ColumnFilterMenu} from "@/app/guests/ColumnFilterMenu";
 
 interface GuestsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -79,32 +66,8 @@ export default function GuestTable<TData, TValue>({columns, data}: GuestsTablePr
                     className="max-w-sm"
                 />
 
-
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-                            Columns
-                        </Button>
-                    </DropdownMenuTrigger>
-
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>
-                            Show/Hide Table Columns
-                        </DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        {table.getAllColumns().filter((column) => column.getCanHide()).map(
-                            (column) => (
-                                <DropdownMenuCheckboxItem
-                                    key={column.id}
-                                    className="capitalize"
-                                    checked={column.getIsVisible()}
-                                    onCheckedChange={(value) => column.toggleVisibility(value)}
-                                >
-                                    {camelCaseToSpacedString(column.id)}
-                                </DropdownMenuCheckboxItem>
-                        ))}
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                {/* Dropdown filtering button component to toggle the visibility of columns */}
+                <ColumnFilterMenu table={table}  />
             </div>
 
             <div className="rounded-md border">
