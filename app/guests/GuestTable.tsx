@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
     ColumnDef,
     ColumnFiltersState,
@@ -13,9 +13,11 @@ import {
     VisibilityState,
 } from "@tanstack/react-table";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
-import {Button} from "@/components/ui/button";
+import {Button, buttonVariants} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {ColumnFilterMenu} from "@/app/guests/ColumnFilterMenu";
+import Link from "next/link";
+import {cn} from "@/lib/utils";
 
 interface GuestsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -68,6 +70,12 @@ export default function GuestTable<TData, TValue>({columns, data}: GuestsTablePr
 
                 {/* Dropdown filtering button component to toggle the visibility of columns */}
                 <ColumnFilterMenu table={table}  />
+                <Link className={cn(buttonVariants({ variant: "default" }), "ml-4")}
+                      href="/guests/new-guest"
+                >
+                    Manual Entry
+                </Link>
+
             </div>
 
             <div className="rounded-md border">
@@ -138,4 +146,3 @@ export default function GuestTable<TData, TValue>({columns, data}: GuestsTablePr
         </div>
     )
 }
-
