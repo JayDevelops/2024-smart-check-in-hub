@@ -1,8 +1,9 @@
+import {GuestForm} from "@/app/guests/new-guest/GuestForm";
 
 export default function NewGuestPage() {
     return (
         <div>
-            New Guest Page
+            <GuestForm />
         </div>
     )
 }
