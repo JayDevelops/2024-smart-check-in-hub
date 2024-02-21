@@ -13,10 +13,10 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {LogOut, User} from "lucide-react";
 import React from "react";
 
-export default function AuthStatus() {
+export default function AuthStatusButton() {
     const { status, data: session} = useSession()
 
-    if(status === "loading") return <Skeleton className="h-12 w-12 rounded-full" />
+    if(status === "loading") return <Skeleton className="h-10 w-16 rounded-lg" />
 
     //  If no user is logged in, return login component
     if(status === "unauthenticated") {
