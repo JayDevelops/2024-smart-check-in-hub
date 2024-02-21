@@ -5,7 +5,7 @@ import MobileNavigation from "@/components/Navigation/MobileNavigation";
 import LeftDesktopNavLinks from "@/components/Navigation/LeftDesktopNavLinks";
 import {HeadingFour} from "@/components/Typography/Headers";
 import {ModeToggle} from "@/components/mode-toggle";
-import AuthStatus from "@/components/Navigation/AuthStatus";
+import AuthStatusButton from "@/components/Navigation/AuthStatusButton";
 import {NavigationMenu, NavigationMenuItem} from "@/components/ui/navigation-menu";
 
 export default function NavBar() {
@@ -23,7 +23,7 @@ export default function NavBar() {
                 {/* LEFT SIDE OF NAVIGATION BAR, BOTH MOBILE AND DESKTOP */}
                 <div className="flex flex-1 items-center justify-between space-x-4 md:justify-end">
                     <div className="w-full flex-1 md:w-auto md:flex-none" /> {/* Hidden, gives space between the left and right nav links*/}
-                    <AuthStatus />
+                    <AuthStatusButton />
                     <NavigationMenuItem className="list-none">
                         <ModeToggle/>
                     </NavigationMenuItem>
