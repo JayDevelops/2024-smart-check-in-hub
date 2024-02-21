@@ -12,7 +12,7 @@ export default function SignInButtons() {
                     variant="outline"
                     key={index}
                 >
-                    {providerLabel.logo} {providerLabel.buttonLabel}
+                    {providerLabel.logo} <span>&nbsp; &nbsp;</span> {providerLabel.buttonLabel}
                 </Button>
             ))}
         </>

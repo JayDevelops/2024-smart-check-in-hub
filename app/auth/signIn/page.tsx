@@ -3,6 +3,7 @@ import authOptions from "@/app/api/auth/authOptions"
 import {BlockQuote, Text} from "@/components/Typography/Text";
 import {HeadingOne} from "@/components/Typography/Headers";
 import SignInButtons from "@/app/auth/signIn/ProviderSignInButtons";
+import {Card} from "@/components/ui/card";
 
 export default async function LogInPage() {
     //  Get server session, if user isn't authenticated then return 401 status codes
@@ -14,9 +15,9 @@ export default async function LogInPage() {
     }
 
     return (
-        <div className="overflow-hidden rounded-[0.5rem] border bg-background shadow-md md:shadow-xl">
+        <Card className="overflow-hidden">
             <div
-                className="container relative hidden h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
+                className="container relative h-[700px] flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0"
             >
                 {/*LEFT SIDE*/}
                 <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
@@ -32,20 +33,17 @@ export default async function LogInPage() {
                     <div className="relative z-20 mt-auto">
                         <BlockQuote className="space-y-2">
                             <p className="text-lg">
-                                “This library has saved me countless hours of work and helped me deliver stunning
-                                designs to
-                                my clients faster than ever before.”
+                                “The shorter way to do many things is to only do one thing at a time.
                             </p>
                         </BlockQuote>
-                        <footer className="text-sm mt-4">Sofia Davis</footer>
+                        <footer className="text-sm mt-4">Mozart</footer>
                     </div>
                 </div>
 
-                {/*RIGHT SIDE*/}
-
+                {/*RIGHT SIDE AND SHOWS ON MOBILE AS WELL*/}
                 <div className="lg:p-6">
                     <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
-                        <div className="flex flex-col space-y-2 text-center">
+                        <div className="flex flex-col space-y-2 text-center mt-48 md:mt-0">
                             <HeadingOne>
                                 Sign In
                             </HeadingOne>
@@ -54,12 +52,12 @@ export default async function LogInPage() {
                             </Text>
                         </div>
 
-                        <div className="grid gap-4">
-                            <SignInButtons />
+                        <div className="grid gap-4 px-20 md:px-4 ">
+                            <SignInButtons/>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </Card>
     )
 }
