@@ -1,7 +1,7 @@
 
 /*
 * This component checks if the user is authenticated. If they are then show a dashboard button
-* Else show the sign-in button so the user may sign in.
+* Else show the signIn button so the user may sign in.
 * */
 import {User} from "@clerk/nextjs/api";
 import {currentUser, SignInButton, UserButton} from "@clerk/nextjs";
@@ -12,7 +12,7 @@ import React from "react";
 export default async function UserAuthenticated() {
     const user: User | null = await currentUser();
 
-    //  If there is no current signed-in user, then return only the sign-in button and the mode-toggle
+    //  If there is no current signed-in user, then return only the signIn button and the mode-toggle
     if(!user) {
         return (
             <SignInButton />
