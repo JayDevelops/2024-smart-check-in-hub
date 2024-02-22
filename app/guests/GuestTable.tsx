@@ -17,7 +17,7 @@ import {Button, buttonVariants} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {ColumnFilterMenu} from "@/app/guests/ColumnFilterMenu";
 import Link from "next/link";
-import {cn} from "@/lib/utils";
+import GuestStatusFilter from "@/app/guests/GuestStatusFilter";
 
 interface GuestsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -57,25 +57,29 @@ export default function GuestTable<TData, TValue>({columns, data}: GuestsTablePr
     return (
         <div>
             {/* TOP HEADER BUTTONS WHICH USE STATE TO FILTER NAME AND COLUMN VISIBILITY */}
-            <div className="flex items-center py-4">
-                {/* FILTER TEXT COMPONENT TO FILTER BY NAME DATA*/}
-                <Input
-                    placeholder="Filter name..."
-                    value={(table.getColumn("fullName")?.getFilterValue() as string) ?? ""}
-                    onChange={(e) => (
-                        table.getColumn("fullName")?.setFilterValue(e.target.value)
-                    )}
-                    className="max-w-sm"
-                />
+            <div className="flex justify-between py-4">
+                <div className="flex gap-2 md:gap-4">
+                    {/* FILTER TEXT COMPONENT TO FILTER BY NAME DATA*/}
+                    <Input
+                        placeholder="Filter name..."
+                        value={(table.getColumn("fullName")?.getFilterValue() as string) ?? ""}
+                        onChange={(e) => (
+                            table.getColumn("fullName")?.setFilterValue(e.target.value)
+                        )}
+                        className="w-48 max-w-screen-lg"
+                    />
+                    <GuestStatusFilter />
+                </div>
 
-                {/* Dropdown filtering button component to toggle the visibility of columns */}
-                <ColumnFilterMenu table={table}  />
-                <Link className={cn(buttonVariants({ variant: "default" }), "ml-4")}
-                      href="/guests/new-guest"
-                >
-                    Manual Entry
-                </Link>
-
+                <div className="flex gap-2 md:gap-4">
+                    {/* Dropdown filtering button component to toggle the visibility of columns */}
+                    <ColumnFilterMenu table={table}  />
+                    <Link className={buttonVariants({ variant: "default" })}
+                          href="/guests/new-guest"
+                    >
+                        Manual Entry
+                    </Link>
+                </div>
             </div>
 
             <div className="rounded-md border">

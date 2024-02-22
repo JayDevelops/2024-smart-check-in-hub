@@ -13,33 +13,60 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import {Textarea} from "@/components/ui/textarea";
-import {cn} from "@/lib/utils";
-import {format} from "date-fns";
-import {CalendarIcon} from "lucide-react";
+
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import DateTimePicker from "@/app/guests/new-guest/DateTimePicker";
+import axios from "axios";
+import {toast} from "@/components/ui/use-toast";
+import {ToastAction} from "@/components/ui/toast";
+import {Textarea} from "@/components/ui/textarea";
+import {format} from "date-fns";
+import {cn} from "@/lib/utils";
+import {CalendarIcon} from "lucide-react";
+import {Input} from "@/components/ui/input";
+import {useRouter} from "next/navigation"
 
 export function GuestForm() {
+    const router = useRouter()
+
     // Define the Guest Form validation with zod resolvers
-    const form = useForm<z.infer<typeof guestSchema>>( {
+    const form = useForm<z.infer<typeof guestSchema>>({
         resolver: zodResolver(guestSchema),
         defaultValues: {
             firstName: "",
             lastName: "",
             notes: "",
-            checkedInAt: new Date(),
-            checkedOutAt: undefined,
-            guestStatus: "CHECKED_IN",
+            signedIn: new Date(),
+            signedOut: undefined,
+            status: "CHECKED_IN",
             locationId: undefined,
         }
     })
 
     // Define a submit handler.
-    function onSubmit(values: z.infer<typeof guestSchema>) {
+    async function onSubmit(data: z.infer<typeof guestSchema>) {
         // This will be type-safe and validated.
-        console.log(values)
+        try {
+            toast({
+                title: "You submitted the following values:",
+                description: (
+                    <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                        <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+                     </pre>
+                ),
+            })
+            await axios.post("/api/guests", data)
+            router.push("/guests")
+            router.refresh()
+            console.log(data)
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Uh oh! Something went wrong.",
+                description: "There was a problem with your request.",
+                action: <ToastAction altText="Try again">Try again</ToastAction>,
+            })
+        }
     }
 
     return (
@@ -102,7 +129,7 @@ export function GuestForm() {
                 
                 <FormField
                     control={form.control}
-                    name="checkedInAt"
+                    name="signedIn"
                     render={({field}) => (
                         <FormItem className="flex flex-col">
                             <FormLabel>Checked In At</FormLabel>
@@ -129,7 +156,7 @@ export function GuestForm() {
                                 <PopoverContent className="w-auto p-2" align="start">
                                     <DateTimePicker
                                         value={field.value ? new Date(field.value): null}
-                                        onChange={(date) => field.onChange(date.toISOString())}
+                                        onChange={(date) => field.onChange(date)}
                                     />
                                 </PopoverContent>
                             </Popover>
