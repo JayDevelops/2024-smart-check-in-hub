@@ -8,7 +8,7 @@ export default function SignInButtons() {
         <>
             {providerLabels.map((providerLabel: ProviderLabel, index: number) => (
                 <Button
-                    onClick={() => signIn(providerLabel.provider)}
+                    onClick={() => signIn(providerLabel.provider, { callbackUrl: '/' })}
                     variant="outline"
                     key={index}
                 >
