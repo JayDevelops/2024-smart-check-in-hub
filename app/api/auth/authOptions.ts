@@ -1,4 +1,4 @@
-import NextAuth, {NextAuthOptions} from "next-auth"
+import {NextAuthOptions} from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import {PrismaAdapter} from "@next-auth/prisma-adapter"
 import prisma from "@/prisma/client";
@@ -12,7 +12,8 @@ const authOptions: NextAuthOptions = {
         }),
     ],
     pages: {
-      signIn: "/auth/signIn"
+        signIn: "/auth/signIn",
+        signOut: "/auth/signOut",
     },
     session: {
         strategy: "jwt",
