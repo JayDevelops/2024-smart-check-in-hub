@@ -37,6 +37,7 @@ export default async function GuestPage({searchParams}: GuestPageProps) {
     //  Get the search params of the status and location of the passed in user
     const status  = statusTypes.includes(searchParams.status) ? searchParams.status : undefined
 
+    //  Grab the location id when it is bigger than 0
     let locationId;
     if(Number(searchParams.location) > 0) {
         locationId = Number(searchParams.location)
