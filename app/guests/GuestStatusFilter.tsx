@@ -25,10 +25,11 @@ export default function GuestStatusFilter() {
         // If there is a status, then append the status to the passed status parameter
         if(status) params.append("status", status)
 
-        // If there is a parameter with orderBy then append to the query parameters
-        if(searchParams.get("orderBy")) {
-            params.append("orderBy", searchParams.get("orderBy")!)
+        // If there is a parameter with location, then append to the query parameters
+        if(searchParams.get("location")) {
+            params.append("location", searchParams.get("location")!)
         }
+
         //  If the passed status is set to "All" then return a blank query, else set to mapped status
         const query = params.size ? "?" + params.toString(): ""
         router.push(`/guests${query}`)
