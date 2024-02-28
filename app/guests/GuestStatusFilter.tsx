@@ -37,7 +37,7 @@ export default function GuestStatusFilter() {
 
     return (
         <Select defaultValue={searchParams.get("status") || ""} onValueChange={onSelectChange}>
-            <SelectTrigger className="flex items-center w-[50%] md:w-[100%]">
+            <SelectTrigger className="flex items-center w-[80%] md:w-[100%]">
                 <SelectValue placeholder="Filter By Status..." />
                 <SelectContent>
                     {statuses.map((status, index) => (

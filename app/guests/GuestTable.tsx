@@ -66,7 +66,7 @@ export default function GuestTable<TData, TValue>({columns, data}: GuestsTablePr
                         onChange={(e) => (
                             table.getColumn("fullName")?.setFilterValue(e.target.value)
                         )}
-                        className="w-48 max-w-screen-lg"
+                        className="w-48 hidden md:inline-block"
                     />
                     <GuestStatusFilter />
                 </div>
