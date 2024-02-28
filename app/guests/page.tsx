@@ -83,5 +83,5 @@ export default async function GuestPage({searchParams}: GuestPageProps) {
     )
 }
 
-// Tells Next.js to dynamically re-rendering at browser refresh
-export const dynamic = 'force-dynamic'
+// // Tells Next.js to dynamically re-rendering at browser refresh
+// export const dynamic = 'force-dynamic'
