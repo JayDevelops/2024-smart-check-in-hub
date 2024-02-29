@@ -6,7 +6,7 @@ import {buttonVariants} from "@/components/ui/button";
 export default function DashboardHeader() {
     return (
         <>
-            <CardTitle>DashBoard</CardTitle>
+            <CardTitle className="text-3xl">DashBoard</CardTitle>
 
             <div className="flex items-center space-x-4">
                 <Text>Date Picker Goes Here</Text>

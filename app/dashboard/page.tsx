@@ -1,6 +1,7 @@
-import {Card, CardContent} from "@/components/ui/card";
+import {Card} from "@/components/ui/card";
 import DashboardHeader from "@/app/dashboard/DashboardHeader";
 import GuestSummaryCards from "@/app/dashboard/GuestSummaryCards";
+import LatestGuests from "@/app/dashboard/LatestGuests";
 import prisma from "@/prisma/client";
 
 export default async function Dashboard() {
@@ -15,15 +16,16 @@ export default async function Dashboard() {
 
     return (
         <section className="dashboard-page">
-            <Card className="flex-1 space-y-4 p-6">
-                <div className="flex items-center justify-between space-y-2">
-                    <DashboardHeader />
+            <Card className="flex-1 space-y-8 p-6">
+                <div className="flex items-center justify-between space-y-4">
+                    <DashboardHeader/>
                 </div>
 
                 <GuestSummaryCards checkedIn={checkedIn} checkedOut={checkedOut}/>
 
-                <CardContent>
-                </CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <LatestGuests />
+                </div>
             </Card>
         </section>
     )
