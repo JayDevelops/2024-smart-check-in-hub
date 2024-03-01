@@ -1,7 +1,6 @@
 "use client"
 import {ColumnDef} from "@tanstack/react-table"
 import {Guest, GuestStatus} from "@prisma/client";
-import {Badge} from "@/components/ui/badge";
 import {formatAmPm} from "@/lib/utils";
 import {
     DropdownMenu,
@@ -14,6 +13,7 @@ import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
 import {GuestTableColumnHeader} from "@/app/guests/GuestTableColumnHeader";
 import {useToast} from "@/components/ui/use-toast";
+import GuestStatusBadge from "@/components/GuestStatusBadge";
 
 export const columns: ColumnDef<Guest>[] = [
     {
@@ -27,8 +27,7 @@ export const columns: ColumnDef<Guest>[] = [
         header: () => <div className="text-left">Status</div>,
         cell: ({row}) => {
             const guestStatus: GuestStatus = row.getValue("status");
-            const statusInfo = guestStatusMap[guestStatus]
-            return <Badge variant={statusInfo.badgeVariant}>{statusInfo.label}</Badge>
+            return <GuestStatusBadge status={guestStatus} />
         }
     },
     {
@@ -86,20 +85,4 @@ function ActionButton({guest}: {guest: Guest}) {
             </DropdownMenuContent>
         </DropdownMenu>
     )
-}
-
-
-const guestStatusMap: Record<GuestStatus, {label: string, badgeVariant: 'default' | 'warning' | 'destructive'}> = {
-    CHECKED_IN: {
-        label: 'Checked In',
-        badgeVariant: 'default'
-    },
-    ON_PREMISES: {
-        label: 'On Premises',
-        badgeVariant: 'warning',
-    },
-    CHECKED_OUT: {
-        label: 'Checked Out',
-        badgeVariant: 'destructive',
-    },
 }
