@@ -4,7 +4,7 @@ import {ReadonlyURLSearchParams, useRouter, useSearchParams} from "next/navigati
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {Location} from "@prisma/client";
 
-export default function GuestLocationFilter({locations}: {locations: Location[]}) {
+export default function GuestLocationFilter({locations, pathTo}: {locations: Location[], pathTo: string}) {
     const router: AppRouterInstance = useRouter()
     const searchParams: ReadonlyURLSearchParams = useSearchParams()
 
@@ -20,14 +20,14 @@ export default function GuestLocationFilter({locations}: {locations: Location[]}
         }
 
         const query = params.size ? "?" + params.toString(): ""
-        router.push(`/guests${query}`)
+        router.push(`${pathTo}${query}`)
     }
 
     //  Include "ALL" label to the other locations passed from the props
 
     return(
         <Select defaultValue={searchParams.get("location") || ""} onValueChange={onSelectChange}>
-            <SelectTrigger className="flex items-center w-[50%] md:w-[30%] mt-2">
+            <SelectTrigger className="flex justify-between items-center w-fit">
                 <SelectValue placeholder="Filter By Location..." />
                 <SelectContent>
                     <SelectItem value={"All"}>
