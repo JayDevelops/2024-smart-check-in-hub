@@ -5,15 +5,18 @@ import Link from "next/link";
 import GuestStatusBadge from "@/components/GuestStatusBadge";
 import {Avatar, AvatarFallback} from "@/components/ui/avatar";
 
-export default async function LatestGuests() {
-    const getLocations = await prisma.location.findMany()
-
+export default async function LatestGuests({locationId}: {locationId: number | undefined}) {
+    // Return the latest guests where the locationId matches the passed params
     const latestGuests = await prisma.guest.findMany({
         orderBy: {
             signedIn: "asc",
         },
-        take: 5,
+        take: 6,
+        where: {
+            locationId: locationId,
+        }
     })
+
     return (
         <Card>
             <CardHeader>
