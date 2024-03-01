@@ -19,7 +19,8 @@ import { GuestStatus, Location } from "@prisma/client";
 import prisma from "@/prisma/client";
 import GuestTable from "@/app/guests/GuestTable";
 import  {columns} from "@/app/guests/GuestsColumns"
-import GuestLocationFilter from "@/app/guests/GuestLocationFilter";
+import GuestLocationFilter from "@/app/GuestLocationFilter";
+import CurrentLocationName from "@/app/guests/CurrentLocationName";
 
 interface GuestPageProps {
     searchParams: GuestQuery,
@@ -49,6 +50,9 @@ export default async function GuestPage({searchParams}: GuestPageProps) {
     //  Grab the entire locations list from prisma
     const locations = await prisma.location.findMany()
 
+    //  Grab the locationName from the search params
+    const locationName: string = locations.filter(location => location.id === locationId!).map(location => location.name)[0]
+
     //  Find the guests with the above "where" condition
     const guests = await prisma.guest.findMany({
         where
@@ -72,9 +76,8 @@ export default async function GuestPage({searchParams}: GuestPageProps) {
     //  Else return the GuestTable with the top location filter
     return (
         <section className="dashboard-page">
-            <HeadingOne color="secondary-foreground">List of All Guests</HeadingOne>
-            <HeadingThree className="my-3">All Locations Below</HeadingThree>
-            <GuestLocationFilter locations={locations} />
+            <CurrentLocationName locationName={locationName} className="mb-4" />
+            <GuestLocationFilter locations={locations} pathTo={"/guests"} />
 
             <div className="mx-auto py-4">
                 <GuestTable columns={columns} data={guests} />
