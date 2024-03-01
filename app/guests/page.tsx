@@ -76,7 +76,7 @@ export default async function GuestPage({searchParams}: GuestPageProps) {
     //  Else return the GuestTable with the top location filter
     return (
         <section className="dashboard-page">
-            <CurrentLocationName locationName={locationName} className="mb-4" />
+            <CurrentLocationName locationName={locationName} className="mb-2" />
             <GuestLocationFilter locations={locations} pathTo={"/guests"} />
 
             <div className="mx-auto py-4">

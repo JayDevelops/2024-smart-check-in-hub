@@ -1,4 +1,4 @@
-import {HeadingOne} from "@/components/Typography/Headers";
+import {HeadingTwo} from "@/components/Typography/Headers";
 import {cn} from "@/lib/utils";
 
 export default function CurrentLocationName({locationName, className}: {locationName: string, className?: string} ) {
@@ -6,11 +6,11 @@ export default function CurrentLocationName({locationName, className}: {location
 
     if (!locationName) {
         return (
-            <HeadingOne className={headingClassName}>Guests at All Locations</HeadingOne>
+            <HeadingTwo className={headingClassName}>Guests at All Locations</HeadingTwo>
         )
     }
 
     return (
-        <HeadingOne className={headingClassName}>Guests at {locationName}</HeadingOne>
+        <HeadingTwo className={headingClassName}>Guests at {locationName}</HeadingTwo>
     )
 }
