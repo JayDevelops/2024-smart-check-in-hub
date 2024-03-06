@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form"
 
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
-import DateTimePicker from "@/app/guests/new-guest/DateTimePicker";
+import DateTimePicker from "@/app/guests/new/DateTimePicker";
 import axios from "axios";
 import {toast} from "@/components/ui/use-toast";
 import {ToastAction} from "@/components/ui/toast";

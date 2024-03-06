@@ -15,9 +15,9 @@ import {
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
 import {Button, buttonVariants} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
-import {ColumnFilterMenu} from "@/app/guests/ColumnFilterMenu";
+import {ColumnFilterMenu} from "@/app/guests/list/ColumnFilterMenu";
 import Link from "next/link";
-import GuestStatusFilter from "@/app/guests/GuestStatusFilter";
+import GuestStatusFilter from "@/app/guests/list/GuestStatusFilter";
 
 interface GuestsTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[],
@@ -75,7 +75,7 @@ export default function GuestTable<TData, TValue>({columns, data}: GuestsTablePr
                     {/* Dropdown filtering button component to toggle the visibility of columns */}
                     <ColumnFilterMenu table={table}  />
                     <Link className={buttonVariants({ variant: "default" })}
-                          href="/guests/new-guest"
+                          href="/guests/new"
                     >
                         Manual Entry
                     </Link>

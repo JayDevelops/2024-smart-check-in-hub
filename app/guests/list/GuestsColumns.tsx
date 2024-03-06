@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import {MoreHorizontal} from "lucide-react";
-import {GuestTableColumnHeader} from "@/app/guests/GuestTableColumnHeader";
+import {GuestTableColumnHeader} from "@/app/guests/list/GuestTableColumnHeader";
 import {useToast} from "@/components/ui/use-toast";
 import GuestStatusBadge from "@/components/GuestStatusBadge";
 

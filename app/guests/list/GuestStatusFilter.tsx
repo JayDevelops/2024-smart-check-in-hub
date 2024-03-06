@@ -32,7 +32,7 @@ export default function GuestStatusFilter() {
 
         //  If the passed status is set to "All" then return a blank query, else set to mapped status
         const query = params.size ? "?" + params.toString(): ""
-        router.push(`/guests${query}`)
+        router.push(`/guests/list${query}`)
     }
 
     return (

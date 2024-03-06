@@ -17,10 +17,10 @@
 import {HeadingOne, HeadingThree} from "@/components/Typography/Headers";
 import { GuestStatus, Location } from "@prisma/client";
 import prisma from "@/prisma/client";
-import GuestTable from "@/app/guests/GuestTable";
-import  {columns} from "@/app/guests/GuestsColumns"
+import GuestTable from "@/app/guests/list/GuestTable";
+import  {columns} from "@/app/guests/list/GuestsColumns"
 import GuestLocationFilter from "@/app/GuestLocationFilter";
-import CurrentLocationName from "@/app/guests/CurrentLocationName";
+import CurrentLocationHeader from "@/app/guests/list/CurrentLocationHeader";
 
 interface GuestPageProps {
     searchParams: GuestQuery,
@@ -76,8 +76,8 @@ export default async function GuestPage({searchParams}: GuestPageProps) {
     //  Else return the GuestTable with the top location filter
     return (
         <section className="dashboard-page">
-            <CurrentLocationName locationName={locationName} className="mb-2" />
-            <GuestLocationFilter locations={locations} pathTo={"/guests"} />
+            <CurrentLocationHeader locationName={locationName} className="mb-2" />
+            <GuestLocationFilter locations={locations} pathTo={"/guests/list"} />
 
             <div className="mx-auto py-4">
                 <GuestTable columns={columns} data={guests} />

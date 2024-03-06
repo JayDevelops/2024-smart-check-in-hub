@@ -19,7 +19,7 @@ const menuLinks: NavigationLink[] = [
     {
         id: 3,
         title: 'Guests',
-        href: '/guests',
+        href: '/guests/list',
     }
 ]
 
