@@ -14,6 +14,7 @@ import {MoreHorizontal} from "lucide-react";
 import {GuestTableColumnHeader} from "@/app/guests/list/GuestTableColumnHeader";
 import {useToast} from "@/components/ui/use-toast";
 import GuestStatusBadge from "@/components/GuestStatusBadge";
+import Link from "next/link";
 
 export const columns: ColumnDef<Guest>[] = [
     {
@@ -81,7 +82,9 @@ function ActionButton({guest}: {guest: Guest}) {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem>View Guest</DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                    <Link href={`/guests/${guest.id}`}>View Guest</Link>
+                </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
     )
