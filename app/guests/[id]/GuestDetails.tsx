@@ -4,6 +4,7 @@ import {Guest} from "@prisma/client";
 import GuestStatusBadge from "@/components/GuestStatusBadge";
 import {Text} from "@/components/Typography/Text";
 
+
 export default function GuestDetails({guest}: {guest: Guest}) {
     return (
         <Card>
